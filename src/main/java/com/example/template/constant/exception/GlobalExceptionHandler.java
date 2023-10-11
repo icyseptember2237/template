@@ -1,5 +1,9 @@
 package com.example.template.constant.exception;
 
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotRoleException;
+import cn.dev33.satoken.exception.SaTokenException;
+import com.sun.istack.internal.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.validation.BindingResult;
@@ -22,18 +26,17 @@ public class GlobalExceptionHandler {
     public void exceptionHandler(Exception ex, HttpServletResponse response, HttpServletRequest request) throws Throwable{
         int errorCode = 500;
         String errorMsg;
-        if (ex instanceof Exceptions) {
-            //AssertUtils断言抛出的自定义业务异常
+        if (ex instanceof Exceptions) {     //AssertUtils断言抛出的自定义业务异常
             errorCode = ((Exceptions) ex).getCode();
             errorMsg = ((Exceptions) ex).getMsg();
             if (log.isDebugEnabled()){
                 log.debug(ERROR, ex);
             }
-        } else if (ex instanceof BusinessException){
-            errorCode = ((BusinessException) ex).getCode();
-            errorMsg = ((BusinessException) ex).getMsg();
+        }  else if (ex instanceof SaTokenException){    //处理sa-token相关异常
+            errorCode = ((SaTokenException) ex).getCode();
+            errorMsg = ex.getMessage();
             if (log.isDebugEnabled()){
-                log.debug(ERROR, ex);
+                log.debug(ERROR,ex);
             }
         } else if (ex instanceof MyBatisSystemException) {
             errorCode = 500;
@@ -54,10 +57,10 @@ public class GlobalExceptionHandler {
             if (log.isDebugEnabled()){
                 log.debug(ERROR, ex);
             }
-        } else {
-            errorMsg = "系统繁忙,请稍后再试...";
+        } else {    //未处理错误
+            errorMsg = ex.getMessage() == null ? "系统繁忙,请稍后再试..." : ex.getMessage();
             if (log.isInfoEnabled()) {
-                log.info("unprocessed exception.", ex);
+                log.info(ex.getMessage() == null ? "unprocessed exception." : ERROR, ex);
             }
             response.setStatus(errorCode);
         }
@@ -65,7 +68,7 @@ public class GlobalExceptionHandler {
         response.setContentType("application/json;charset=UTF-8");
         response.addHeader("Content-Type", "application/json;charset=utf-8");
         try {
-            String resultJson = "{\"code\": " + errorCode + ",\"msg\": \"" + errorMsg + "\",\"data\": []}";
+            String resultJson = "{\"code\": " + errorCode + ",\"msg\": \"" + errorMsg + "\",\"data\": null}";
             response.getWriter().write(resultJson);
             response.flushBuffer();
         } catch (IOException e) {

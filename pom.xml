@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.21</version>
+            <version>1.2.8</version>
         </dependency>
 
         <dependency>
@@ -60,12 +60,12 @@
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot-starter</artifactId>
-            <version>1.29.0</version>
+            <version>1.36.0</version>
         </dependency>
         <dependency>
             <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-dao-redis-jackson</artifactId>
-            <version>1.29.0</version>
+            <artifactId>sa-token-redis-jackson</artifactId>
+            <version>1.36.0</version>
         </dependency>
 
         <dependency>

@@ -1,9 +1,9 @@
 package com.example.template.constant;
 
 public enum UserType {
-    MANAGER("manager"),
-    EMPLOYEE("employee"),
-    ADMIN("admin");
+    MANAGER("MANAGER"),
+    EMPLOYEE("EMPLOYEE"),
+    ADMIN("ADMIN");
 
     private final String value;
 
@@ -11,7 +11,7 @@ public enum UserType {
         this.value = value;
     }
 
-    String getValue(UserType userType) {
+    public static String getValue(UserType userType) {
         return userType.value;
     }
 
