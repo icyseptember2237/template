@@ -2,8 +2,10 @@ package com.example.template.constant.resp;
 
 import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.springframework.lang.Nullable;
 
+@Data
 public final class Result <T> {/**
      * 返回请求的状态
      * 只有 200 代表成功，其余状态需要显示 msg 中的信息
@@ -29,7 +31,7 @@ public final class Result <T> {/**
         this.data = data;
     }
 
-    public static <T> Result<T> resp(@NotNull RespState respState){
+    public static Result resp(@NotNull RespState respState){
         return of(respState,null,null);
     }
 

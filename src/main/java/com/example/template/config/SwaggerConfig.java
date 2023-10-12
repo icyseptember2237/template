@@ -52,8 +52,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("食刻API")
-                .description("食刻API")
+                .title("")
+                .description("")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();

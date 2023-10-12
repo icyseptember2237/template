@@ -1,31 +1,13 @@
 package com.example.template.constant;
 
-public enum UserType {
-    MANAGER("MANAGER"),
-    EMPLOYEE("EMPLOYEE"),
-    ADMIN("ADMIN");
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
 
-    private final String value;
-
-    UserType(String value){
-        this.value = value;
-    }
-
-    public static String getValue(UserType userType) {
-        return userType.value;
-    }
-
-    public static UserType getType(String value){
-        switch (value) {
-            case "employee":
-                return UserType.EMPLOYEE;
-            case "manager":
-                return UserType.MANAGER;
-            case "admin":
-                return UserType.ADMIN;
-            default:
-                return null;
-        }
-    }
-
+@Getter
+@AllArgsConstructor
+public class UserType {
+    public static final String ADMIN = "ADMIN";
+    public static final String MANAGER = "MANAGER";
+    public static final String EMPLOYEE = "EMPLOYEE";
 }

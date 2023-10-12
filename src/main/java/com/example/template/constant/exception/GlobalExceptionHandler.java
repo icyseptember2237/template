@@ -32,7 +32,13 @@ public class GlobalExceptionHandler {
             if (log.isDebugEnabled()){
                 log.debug(ERROR, ex);
             }
-        }  else if (ex instanceof SaTokenException){    //处理sa-token相关异常
+        } else if (ex instanceof NotLoginException){
+            errorCode = Integer.parseInt(((NotLoginException) ex).getType());
+            errorMsg = ex.getMessage();
+            if (log.isDebugEnabled()){
+                log.debug(ERROR, ex);
+            }
+        } else if (ex instanceof SaTokenException){    //处理sa-token相关异常
             errorCode = ((SaTokenException) ex).getCode();
             errorMsg = ex.getMessage();
             if (log.isDebugEnabled()){

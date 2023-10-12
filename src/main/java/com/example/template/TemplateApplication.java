@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAsync
 @EnableScheduling
 @EnableTransactionManagement
-@EnableServletRequestLog
+//@EnableServletRequestLog
 public class TemplateApplication {
 
     public static void main(String[] args) {
