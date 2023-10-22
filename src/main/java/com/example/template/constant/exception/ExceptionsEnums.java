@@ -57,4 +57,14 @@ public interface ExceptionsEnums extends Exceptions{
         private int code;
         private String msg;
     }
+
+    @Getter
+    @AllArgsConstructor
+    enum File implements ExceptionsEnums{
+        DOWNLOAD_FAIL(500,"文件下载失败"),
+        ILLEGAL_FILENAME(500,"文件名称错误"),
+        UPLOAD_FAIL(500,"文件上传失败");
+        private int code;
+        private String msg;
+    }
 }

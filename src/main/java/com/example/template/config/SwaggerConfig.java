@@ -1,5 +1,6 @@
 package com.example.template.config;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -21,10 +22,11 @@ import java.util.List;
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.OAS_30) // v2 不同
+        return new Docket(DocumentationType.OAS_30)
+                .enable(true)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.template.controller")) // 设置扫描路径
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class)) // 扫描所有带有@ApiOperation的注解
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(Collections.singletonList(securityScheme()))
@@ -52,9 +54,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("")
-                .description("")
+                .title("不知道是什么东西的接口文档")
+                .description("不知道是什么东西的接口文档的描述")
                 .termsOfServiceUrl("")
+                .contact(new Contact("联系谁呢？",null,null))
                 .version("1.0")
                 .build();
     }
